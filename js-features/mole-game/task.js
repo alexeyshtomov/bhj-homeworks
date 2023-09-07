@@ -14,11 +14,12 @@
         document.getElementById("dead").textContent = deadCount;
         document.getElementById("lost").textContent = lostCount;
       },
-      handleClick = () => {
+      handleClick = (event) => {
         if (!playing) {
           return;
         }
-        if (getHole(activeHole).classList.contains('hole_has-mole')) {
+        const clickedHole = event.target;
+        if (clickedHole.classList.contains('hole_has-mole')) {
           deadCount++;
         } else {
           lostCount++;
@@ -36,9 +37,7 @@
       }, 800);
   
     
-    for (let i = 1; i <= 9; i++) {
-      getHole(i).addEventListener("click", handleClick);
-    }
+    getHole(activeHole).addEventListener("click", handleClick);
   
     next();
   })();
