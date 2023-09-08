@@ -37,7 +37,7 @@
       }, 800);
   
     
-    getHole(activeHole).addEventListener("click", handleClick);
+      document.querySelectorAll(".hole").forEach(hole => hole.addEventListener("click", handleClick));
   
     next();
   })();
