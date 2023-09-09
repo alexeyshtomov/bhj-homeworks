@@ -1,15 +1,15 @@
-// Получаем ссылку на изображение анимации загрузки
-const loader = document.getElementById('загрузчик');
-
-// Получаем ссылку на элемент, в который будем вставлять данные о курсе валют
 const itemsContainer = document.getElementById('items');
+const loader = document.getElementById('loader');
 
-// Отправляем GET-запрос на указанный URL
+// Отправляем GET-запрос на сервер курсов валют
 fetch('https://students.netoservices.ru/nestjs-backend/slow-get-courses')
   .then((response) => response.json())
   .then((data) => {
-    // Получаем данные о курсе валют из JSON-ответа
+    // Получаем данные о курсах валют
     const currencies = data.ответ.Значение;
+
+    // Очищаем содержимое контейнера
+    itemsContainer.innerHTML = '';
 
     // Создаем элементы для каждой валюты и добавляем их в контейнер
     for (const currencyCode in currencies) {
@@ -26,12 +26,9 @@ fetch('https://students.netoservices.ru/nestjs-backend/slow-get-courses')
       }
     }
 
-    // Скрываем анимацию
+    // Скрываем анимацию загрузки
     loader.classList.remove('loader_active');
   })
   .catch((error) => {
     console.error('Произошла ошибка при загрузке данных:', error);
-
-    
-    loader.classList.remove('loader_active');
   });
