@@ -1,28 +1,37 @@
-document.addEventListener("DOMContentLoaded", function () {
-    
+function sendGETRequest(url, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+  
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        const response = JSON.parse(xhr.responseText);
+        callback(response);
+      }
+    };
+  
+    xhr.send();
+  }
+  
+  
+  function displayPoll(pollData) {
     const pollTitle = document.getElementById("poll__title");
     const pollAnswers = document.getElementById("poll__answers");
-
-    // Отправляем GET-запрос для получения опроса
-    fetch("https://students.netoservices.ru/nestjs-backend/poll")
-        .then(response => response.json())
-        .then(data => {
-            
-            pollTitle.textContent = data.данные.title;
-
-           
-            data.данные.answers.forEach(answer => {
-                const answerButton = document.createElement("button");
-                answerButton.className = "poll__answer";
-                answerButton.textContent = answer;
-                answerButton.addEventListener("click", () => {
-                    // Выводим диалоговое 
-                    alert("Спасибо, ваш голос засчитан!");
-                });
-                pollAnswers.appendChild(answerButton);
-            });
-        })
-        .catch(error => {
-            console.error("Произошла ошибка при получении опроса:", error);
-        });
-});
+  
+    pollTitle.textContent = pollData.question;
+  
+    pollData.answers.forEach((answer) => {
+      const answerButton = document.createElement("button");
+      answerButton.className = "poll__answer";
+      answerButton.textContent = answer;
+  
+      answerButton.addEventListener("click", () => {
+        alert("Спасибо, ваш голос засчитан!");
+      });
+  
+      pollAnswers.appendChild(answerButton);
+    });
+  }
+  
+  
+  sendGETRequest("https://students.netoservices.ru/nestjs-backend/poll", displayPoll);
+  
