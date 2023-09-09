@@ -1,10 +1,10 @@
-
 function closeModal() {
     const modal = document.getElementById("subscribe-modal");
     modal.classList.remove("modal_active");
 
-    
-    document.cookie = "modalClosed=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 2);
+    document.cookie = "modalClosed=true; expires=" + expirationDate.toUTCString() + "; path=/";
 }
 
 
