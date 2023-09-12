@@ -1,4 +1,3 @@
-
 const editor = document.getElementById("editor");
 editor.addEventListener("input", function () {
   
