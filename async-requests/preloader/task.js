@@ -6,15 +6,12 @@ fetch('https://students.netoservices.ru/nestjs-backend/slow-get-courses')
   .then((response) => response.json())
   .then((data) => {
     
-    const currencies = data.ответ.Значение;
-
-    
     itemsContainer.innerHTML = '';
 
     
-    for (const currencyCode in currencies) {
-      if (currencies.hasOwnProperty(currencyCode)) {
-        const currency = currencies[currencyCode];
+    for (const currencyCode in data.ответ.Значение) {
+      if (data.ответ.Значение.hasOwnProperty(currencyCode)) {
+        const currency = data.ответ.Значение[currencyCode];
         const item = document.createElement('div');
         item.classList.add('item');
         item.innerHTML = `
