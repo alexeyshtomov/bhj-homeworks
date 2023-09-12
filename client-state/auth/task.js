@@ -1,31 +1,26 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const signinForm = document.getElementById("signin__form");
+    const signinForm = document.getElementById("вход в__форму"); 
     const signinBtn = document.getElementById("signin__btn");
-    const welcomeBlock = document.getElementById("welcome");
+    const welcomeBlock = document.getElementById("добро пожаловать");
     const userIdSpan = document.getElementById("user_id");
 
-    
     const savedUserId = localStorage.getItem("user_id");
     if (savedUserId) {
         userIdSpan.textContent = savedUserId;
-        welcomeBlock.style.display = "block";
+        welcomeBlock.classList.add("welcome_active"); /
     }
 
-    
-    signinBtn.addEventListener("click", function (event) {
-        event.preventDefault(); 
+    signinForm.addEventListener("submit", function (event) {
+        event.preventDefault();
 
-        
         const login = signinForm.querySelector('[name="login"]').value;
         const password = signinForm.querySelector('[name="password"]').value;
 
-        
         const data = {
             login: login,
             password: password,
         };
 
-        
         fetch("https://students.netoservices.ru/nestjs-backend/auth", {
             method: "POST",
             headers: {
@@ -38,12 +33,10 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .then(function (result) {
                 if (result.success) {
-                    
                     localStorage.setItem("user_id", result.user_id);
                     userIdSpan.textContent = result.user_id;
-                    welcomeBlock.style.display = "block";
+                    welcomeBlock.classList.add("welcome_active"); 
                 } else {
-                   
                     alert("Неверный логин/пароль");
                 }
             })
