@@ -23,13 +23,12 @@ form.addEventListener('submit', (event) => {
     }
   });
 
-  // Настраиваем обработчик события завершения загрузки
   xhr.addEventListener('load', () => {
-    if (xhr.status === 200) {
-      // Загрузка успешно завершена
+    if (xhr.status === 201) { 
+      progressBar.value = 100;
       console.log('Файл успешно загружен');
     } else {
-      // В случае ошибки вы можете обработать её здесь
+      
       console.error('Произошла ошибка при загрузке файла');
     }
   });
