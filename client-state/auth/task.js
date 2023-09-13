@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const signinForm = document.getElementById("вход в__форму");
+    const signinForm = document.getElementById("вход_в_форму"); 
     const signinBtn = document.getElementById("signin__btn");
-    const welcomeBlock = document.getElementById("добро пожаловать");
+    const welcomeBlock = document.getElementById("добро_пожаловать"); 
     const userIdSpan = document.getElementById("user_id");
 
     const savedUserId = localStorage.getItem("user_id");
     if (savedUserId) {
         userIdSpan.textContent = savedUserId;
-        welcomeBlock.classList.add("welcome_active");//;
+        welcomeBlock.classList.add("welcome_active");
     }
 
     signinForm.addEventListener("submit", function (event) {
@@ -29,7 +29,11 @@ document.addEventListener("DOMContentLoaded", function () {
             body: JSON.stringify(data),
         })
             .then(function (response) {
-                return response.json();
+                if (response.status === 200) {
+                    return response.json();
+                } else {
+                    throw new Error("Ошибка сервера: " + response.status);
+                }
             })
             .then(function (result) {
                 if (result.success) {
@@ -42,7 +46,9 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .catch(function (error) {
                 console.error("Произошла ошибка при отправке запроса:", error);
+                alert("Произошла ошибка при отправке запроса. Пожалуйста, попробуйте еще раз.");
             });
     });
-});
+})
+// проверяем
 
