@@ -9,9 +9,9 @@ xhr.onload = function () {
         itemsContainer.innerHTML = '';
         const data = JSON.parse(xhr.responseText);
 
-        for (const currencyCode in data.response.Values) {
-            if (data.response.Values.hasOwnProperty(currencyCode)) {
-                const currency = data.response.Values[currencyCode];
+        for (const currencyCode in data.Valute) {
+            if (data.Valute.hasOwnProperty(currencyCode)) {
+                const currency = data.Valute[currencyCode];
                 const item = document.createElement('div');
                 item.classList.add('item');
                 item.innerHTML = `
