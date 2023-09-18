@@ -9,19 +9,19 @@ xhr.onload = function () {
         itemsContainer.innerHTML = '';
         const data = JSON.parse(xhr.responseText);
 
-        for (const currencyCode in data.Valute) {
-            if (data.Valute.hasOwnProperty(currencyCode)) {
-                const currency = data.Valute[currencyCode];
-                const item = document.createElement('div');
-                item.classList.add('item');
-                item.innerHTML = `
-                    <div class="item__code">${currency.CharCode}</div>
-                    <div class="item__value">${currency.Value}</div>
-                    <div class="item__currency">rub</div>
-                `;
-                itemsContainer.appendChild(item);
-            }
-        }
+for (const currencyCode in data.response.Valute) {
+    if (data.response.Valute.hasOwnProperty(currencyCode)) {
+        const currency = data.response.Valute[currencyCode];
+        const item = document.createElement('div');
+        item.classList.add('item');
+        item.innerHTML = `
+            <div class="item__code">${currency.CharCode}</div>
+            <div class="item__value">${currency.Value}</div>
+            <div class="item__currency">rub</div>
+        `;
+        itemsContainer.appendChild(item);
+    }
+}
 
         loader.classList.remove('loader_active');
     } else {
